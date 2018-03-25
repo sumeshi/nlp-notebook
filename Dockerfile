@@ -12,7 +12,7 @@ RUN apt-get update -y --fix-missing && \
     mecab-ipadic-utf8
 
 WORKDIR /tmp
-RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git && \
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
 WORKDIR /tmp/mecab-ipadic-neologd
 RUN ./bin/install-mecab-ipadic-neologd -n -y
 
