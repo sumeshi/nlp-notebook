@@ -25,10 +25,8 @@ RUN ./configure --with-charset=utf8 \
 WORKDIR /opt
 RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
 WORKDIR /opt/mecab-ipadic-neologd
-RUN ./bin/install-mecab-ipadic-neologd -n -y
+RUN ./bin/install-mecab-ipadic-neologd -n
 
 RUN pip install \
     gensim \
     natto-py
-
-USER $NB_UID
