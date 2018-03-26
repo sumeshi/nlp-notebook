@@ -100,4 +100,4 @@ RUN pip install \
     gensim \
     natto-py
 
-WORKDIR /home
+WORKDIR $HOME
