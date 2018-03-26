@@ -7,7 +7,6 @@ ARG TEST_ONLY_BUILD
 
 USER root
 
-# R pre-requisites
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     mecab \
@@ -45,6 +44,7 @@ RUN cd /opt \
     git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git \
     cd /opt/mecab-ipadic-neologd \
     sudo ./bin/install-mecab-ipadic-neologd -n
+RUN sed -i -e "s:^dicdir.*:'dicdir = /usr/lib/mecab/dic/mecab-ipadic-neologd':g" /etc/mecabrc
 
 USER $NB_UID
 
