@@ -30,3 +30,5 @@ RUN ./bin/install-mecab-ipadic-neologd -n
 RUN pip install \
     gensim \
     natto-py
+
+WORKDIR /home
