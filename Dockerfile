@@ -1,10 +1,6 @@
 FROM jupyter/scipy-notebook
 LABEL maintainer="S.Nakano(j15322sn@gmail.com)"
 
-# Set when building on Travis so that certain long-running build steps can
-# be skipped to shorten build time.
-ARG TEST_ONLY_BUILD
-
 USER root
 
 RUN apt-get update && \
@@ -41,10 +37,10 @@ RUN mkdir /etc/julia && \
     chown $NB_USER $JULIA_PKGDIR && \
     fix-permissions $JULIA_PKGDIR
 
-# neologd install
-RUN cd /opt
-RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd
-RUN ./mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -y
+# neologd install / set default-dict
+RUN cd /opt && \
+    git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd \
+    ./mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -y
 RUN sed -i -e 's:^dicdir.*:dicdir=/usr/lib/mecab/dic/mecab-ipadic-neologd:g' /etc/mecabrc
 
 USER $NB_UID
@@ -97,6 +93,7 @@ RUN julia -e 'Pkg.init()' && \
     rm -rf $HOME/.local && \
     fix-permissions $JULIA_PKGDIR $CONDA_DIR/share/jupyter
 
+# install nlp package
 RUN pip install \
     gensim \
     natto-py
