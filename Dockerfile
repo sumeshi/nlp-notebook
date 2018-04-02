@@ -43,7 +43,7 @@ RUN mkdir /etc/julia && \
 # neologd install
 RUN cd /opt \
     git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
-RUN cd /opt/mecab-ipadic-neologd
+RUN cd mecab-ipadic-neologd
 RUN ./bin/install-mecab-ipadic-neologd -n -y
 RUN sed -i -e 's:^dicdir.*:dicdir=/usr/lib/mecab/dic/mecab-ipadic-neologd:g' /etc/mecabrc
 
