@@ -41,8 +41,8 @@ RUN mkdir /etc/julia && \
     fix-permissions $JULIA_PKGDIR
 
 # neologd install
-RUN cd /opt \
-    git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
+RUN cd /opt
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd
 RUN ./mecab-ipadic-neologd/bin/install-mecab-ipadic-neologd -n -y
 RUN sed -i -e 's:^dicdir.*:dicdir=/usr/lib/mecab/dic/mecab-ipadic-neologd:g' /etc/mecabrc
 
