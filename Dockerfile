@@ -9,6 +9,7 @@ USER root
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    file \
     mecab \
     libmecab-dev \
     mecab-ipadic-utf8 \
@@ -43,7 +44,7 @@ RUN mkdir /etc/julia && \
 RUN cd /opt \
     git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git \
     cd /opt/mecab-ipadic-neologd \
-    sudo ./bin/install-mecab-ipadic-neologd -n
+    sudo ./bin/install-mecab-ipadic-neologd -n -y
 RUN sed -i -e 's:^dicdir.*:dicdir=/usr/lib/mecab/dic/mecab-ipadic-neologd:g' /etc/mecabrc
 
 USER $NB_UID
